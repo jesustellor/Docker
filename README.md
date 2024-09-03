@@ -47,6 +47,7 @@ It should be the only option unless you have created containers before.
 
 VSCODE will open with git enabled, but you will see an ubuntu folder, in the above command we created /workspace inside the container so all you have to do is cd `/workspace` the `/` is important because it is at the root of the container.. 
 if you `dir` here or `ls` you will see the files in your folder, `code filename.js` will open the file in vscode, git add, git commit, git push.. 
+
 ***NOTE*** dont forget you have to add 
 git config --global user.name username
 git config --global user.email email.@email.com
