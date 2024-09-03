@@ -15,19 +15,20 @@ Visit [Docker.com](https://www.docker.com/products/docker-desktop/) Download and
 
 After you have Docker installed, you can use it to build images that when ran will turn into containers... ***Before you continue*** make sure docker is running its engine. 
 
-create a file called `Dockerfile` to create your git image file that you will be using across your projects as if git was installed in your operating system. <span style="color:red;">**NOTE**</span> You are creating a text file here and not running commands in the terminal.
+create a file called `Dockerfile` to create your git image file that you will be using across your projects as if git was installed in your operating system. **NOTE** You are creating a text file here and not running commands in the terminal.
 
 ```
     FROM ubuntu:latest
     RUN apt-get update && apt-get install -y git
 ```
 
-This file will be used to create an ubuntu image with git installed.. next you build the image with the following command <span style="color:red;">**NOTE**</span> you will run this command in the terminal in the same directory as your `Dockerfile` file.
+This file will be used to create an ubuntu image with git installed.. next you build the image with the following command. **NOTE** you will run this command in the terminal in the same directory as your `Dockerfile` file.
 
 ```
     docker build -t git-image . 
 ```
 
+the period `.` is used to specify the current directory. it is there to specify the location of the `Dockerfile` file on the current directory.
 This will create an image named `git-image` that contains the image with git installed.
 
 to run the image you can use the following command in the directory you want to use git in. im not sure if there is a shortcut for this yet, but this is how i run the image in my terminal
