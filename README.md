@@ -46,7 +46,7 @@ press ctrl+shift+p and search for "Dev Containers" Attach to running container a
 It should be the only option unless you have created containers before.
 
 VSCODE will open with git enabled, but you will see an ubuntu folder, in the above command we created /workspace inside the container so all you have to do is cd `/workspace` the `/` is important because it is at the root of the container.. 
-if you `dir` here or `ls` you will see the files in your folder, `code filename.js` will open the file in vscode, git add, git commit, git push.. 
+if you `dir` here or `ls` you will see the files in your folder, `code filename.js` will open the file in vscode, or `code folderNmae` and use git like you normally would.. git add, git commit, git push.. or with VSCODE git Add ons
 
 ***NOTE*** dont forget you have to add 
 ```
