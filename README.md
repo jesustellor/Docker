@@ -83,10 +83,12 @@ docker run node:20-alpine npm -v # should print `10.8.2
 
 ### Node projects with Docker
 
-to get this to work, if you have been following along should have 2 vscode windows open, one that you used the terminal on and Dev Devices, and one that has workspace at the top of vscode.. what i like to do is open a second terminal in the first vscode window and type 
+to get this to work, if you have been following along should have 2 vscode windows open, one that you used the terminal on and Dev Devices, and one that has workspace at the top of vscode.. 
+
+***NOTE*** you can only use one at a time.. but can go between them easily... 
 ```
 docker run -it --rm -v "$(pwd):/workspace" -w /workspace node:20-alpine
 ```
-on the vs code running git press `ctrl + shift + p` and search for "Dev Devices" and again link to the running container running node, it should open another vscode window with both node and git running... 
+on the vs code running git press `ctrl + shift + p` and search for "Dev Devices" and again link to the running container running node, it should open another vscode window will open with node running... 
 
 Happy Coding..
