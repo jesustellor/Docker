@@ -57,3 +57,36 @@ git config --global user.email email.@email.com
 ```
 
 changing the username and email to match your git account..
+
+## Docker with Node
+
+Node has an easy option to build images 
+
+ ***NOTE:***
+***Docker is not a Node.js package manager.***
+***Please ensure it is already installed on your system.***
+***Follow official instructions at https://docs.docker.com/desktop/
+Docker images are provided officially at https://github.com/nodejs/docker-node/***
+
+pull the Node.js Docker image
+```
+docker pull node:20-alpine
+```
+verify the right Node.js version is in the environment
+```
+docker run node:20-alpine node -v # should print `v20.17.0`
+```
+verifies the right npm version is in the environment
+```
+docker run node:20-alpine npm -v # should print `10.8.2
+```
+
+### Node projects with Docker
+
+to get this to work, if you have been following along should have 2 vscode windows open, one that you used the terminal on and Dev Devices, and one that has workspace at the top of vscode.. what i like to do is open a second terminal in the first vscode window and type 
+```
+docker run -it --rm -v "$(pwd):/workspace" -w /workspace node:20-alpine
+```
+on the vs code running git press `ctrl + shift + p` and search for "Dev Devices" and again link to the running container running node, it should open another vscode window with both node and git running... 
+
+Happy Coding..
