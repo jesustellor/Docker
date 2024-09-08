@@ -90,10 +90,21 @@ docker run -it --rm -v "$(pwd):/workspace" -w /workspace node:20-alpine
 ```
 on the vs code running git press `ctrl + shift + p` and search for "Dev Devices" and again link to the running container running node, it should open another vscode window will open with node running... 
 
+## Docker Image from Container
+
+***Configuration files for next time***: One thing i found myself doing was typing out long hand commands, or going back to edit the bashrc file to create alias for git... to persist this across sessions. make your change. bashrc file is found in cd `/home/ubuntu` you can only use `code .bashrc` to edit it if you use vscode Dev Containers.
+
+```
+docker commit container_id new_image_name
+```
+
+You can now use `docker run -it --rm -v "$(pwd):/workspace" -w /workspace new_image_name`
 
 ### known issues
 
 ***NOTE*** you can only use one at a time.. but can go between them easily... 
 
 ***ALTERNATIVE*** **you can update the Docker file to include node and npm `RUN apt-get update && apt-get install -y git nodejs npm` and rebuild the image.. `docker build -t node-image .`** 
+
+
 Happy Coding..
