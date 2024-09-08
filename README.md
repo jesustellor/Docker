@@ -104,7 +104,7 @@ You can now use `docker run -it --rm -v "$(pwd):/workspace" -w /workspace new_im
 
 ***NOTE*** you can only use one at a time.. but can go between them easily... 
 
-***Not sure where Ubuntu is sourcing the bashrc file but you can run source /home/ubuntu/.bashrc***
+***Ubuntu is sourcing the bashrc file from ~/.bashrc but you can run source /home/ubuntu/.bashrc*** the `~/.bashrc` is color less so when you source to `/home/ubuntu/.bashrc` it will change the terminal color.. you can copy the `bashrc` file from `/home/ubuntu/.bashrc` and paste it in `~/.bashrc`, and make the new image from the container. to not source each time...
 
 ***ALTERNATIVE*** **you can update the Docker file to include node and npm `RUN apt-get update && apt-get install -y git nodejs npm` and rebuild the image.. `docker build -t node-image .`** 
 
