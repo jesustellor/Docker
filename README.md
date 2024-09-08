@@ -104,6 +104,8 @@ You can now use `docker run -it --rm -v "$(pwd):/workspace" -w /workspace new_im
 
 ***NOTE*** you can only use one at a time.. but can go between them easily... 
 
+***Not sure where Ubuntu is sourcing the bashrc file but you can run source /home/ubuntu/.bashrc***
+
 ***ALTERNATIVE*** **you can update the Docker file to include node and npm `RUN apt-get update && apt-get install -y git nodejs npm` and rebuild the image.. `docker build -t node-image .`** 
 
 
