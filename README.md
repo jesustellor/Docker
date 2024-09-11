@@ -15,7 +15,7 @@ Visit [Docker.com](https://www.docker.com/products/docker-desktop/) Download and
 
 After you have Docker installed, you can use it to build images that when ran will turn into containers... ***Before you continue*** make sure docker is running its engine. 
 
-create a file called `Dockerfile` to create your git image file that you will be using across your projects as if git was installed in your operating system. **NOTE** You are creating a text file here and not running commands in the terminal.
+create a file called `Dockerfile` to create your git image file that you will be using across your projects. This file does not have an extension. **NOTE** You are creating a text file here and not running commands in the terminal.
 
 ```
     FROM ubuntu:latest
