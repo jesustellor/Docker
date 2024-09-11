@@ -7,7 +7,7 @@ This repository is a comprehensive documentation on how to effectively use Docke
 
 Feel free to _modify_ this description, on any section you want to highlight. 
 
-## Install Docker
+## Install Docker..
 
 Visit [Docker.com](https://www.docker.com/products/docker-desktop/) Download and install docker for your operating system.
 
