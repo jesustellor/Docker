@@ -110,3 +110,27 @@ You can now use `docker run -it --rm -v "$(pwd):/workspace" -w /workspace new_im
 
 
 Happy Coding..
+
+
+#UPDATE 9/27/2024
+
+I have mainstreamed my environment to Using Docker Only, after downloading the OpenVS Code for the Web Extension from docker, i saw that in order to use the extension with added packages you had to install them using commands found here [Here](https://code.visualstudio.com/docs/remote/containers).
+
+```
+docker exec -ti openvscode_embedded_dd_vm /bin/sh -c "curl -s https://raw.githubusercontent.com/marcelo-ochoa/openvscode-docker-extension/main/addDocker.sh | bash"
+```
+the above command did not work for me as it was exiting without installing... i ran this alternatively
+
+```
+docker exec -ti openvscode_embedded_dd_vm /bin/sh -c "curl -s https://raw.githubusercontent.com/marcelo-ochoa/openvscode-docker-extension/main/addDocker.sh | sed 's/apt-get install/apt-get install -y/g' | bash"
+```
+adding the -y flag to apt-get so the installation can run smoothly.
+
+## Adding Oh My ZSH
+
+with the above command tweak it to include `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
+
+ending up with something like this
+```
+docker exec -ti openvscode_embedded_dd_vm /bin/sh -c "curl -s https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sed 's/apt-get install/apt-get install -y/g' | bash"
+```
