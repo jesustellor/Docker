@@ -112,7 +112,7 @@ You can now use `docker run -it --rm -v "$(pwd):/workspace" -w /workspace new_im
 Happy Coding..
 
 
-#UPDATE 9/27/2024
+# UPDATE 9/27/2024
 
 I have mainstreamed my environment to Using Docker Only, after downloading the OpenVS Code for the Web Extension from docker, i saw that in order to use the extension with added packages you had to install them using commands found here [Here](https://code.visualstudio.com/docs/remote/containers).
 
