@@ -134,3 +134,15 @@ ending up with something like this
 ```
 docker exec -ti openvscode_embedded_dd_vm /bin/sh -c "curl -s https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sed 's/apt-get install/apt-get install -y/g' | bash"
 ```
+
+### Adding node and npm
+
+From here you can install node and npm, or any other tool you might need, python or ruby..
+
+```
+sudo apt-get install nodejs npm
+```
+
+I thought at first that this was being installed on my WSL, but it is in fact being installed in the container / extension for vscode.. 
+
+Happy Coding... 
