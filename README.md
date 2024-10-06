@@ -95,11 +95,11 @@ Happy Coding..
 
 # UPDATE 9/27/2024
 
-I have mainstreamed my environment to Using Docker Only, after downloading the OpenVS Code for the Web Extension from docker, i saw that in order to use the extension with added packages you had to install them using commands found here [Here](https://github.com/marcelo-ochoa/coder-docker-extension/blob/main/README.md). add them only after completing this next step or you will have to do it all again.
+I have mainstreamed my environment to Using Docker Only, after downloading the OpenVS Code for the Web Extension from docker, *** 18k downloads not 8k.*** i saw that in order to use the extension with added packages you had to install them using commands found here [Here](https://github.com/marcelo-ochoa/coder-docker-extension/blob/main/README.md). add them only after completing this next step or you will have to do it all again.
 
 I then modify the config file located somewhere similar to this.. `C:\Users\jesus\AppData\Roaming\Docker\extensions\mochoa_coder-docker-extension\vm`
 
-The docker compose file should be updated to include the following port updates for your projects, and folder you want to mount, I just mount Documents.. thats only if you want to make it easy to transfer files between the editor and your computer.
+The docker compose file should be updated to include the following port updates for your projects, I only added the 3000 one.. target is the port created in the container in my case npm start, creating react app in localhost:3000 and the published is your localhost port so you can pick any port you want i just keep it consistent, I also just mount Documents.. thats only if you want to make it easy to transfer files between the editor and your computer.
 
 ```
 name: mochoa_coder-docker-extension-desktop-extension
@@ -186,7 +186,8 @@ volumes:
 Once you have restarted Docker and then your Computer, because after a Docker restart it usually doesn't do it.. you will see your folder and inside Docker Desktop, under the containers, you will you that the new port has been added as well.
 
 ## Addind extra packages
-If want to run/debug NodeJS code a node command must be installed prior you checkout for project. To simplify that an script is provided as post installation step, here an example of using them:
+If want to run/debug NodeJS code a node command must be installed prior you checkout for project. To simplify that an script is provided as post installation step, here an example of using them:  You will run these commands on your local computer as you only have docker installed.
+
 
 ```
 docker exec -ti --user root coder_embedded_dd_vm /bin/sh -c "curl -s https://raw.githubusercontent.com/marcelo-ochoa/coder-docker-extension/main/addNodeJS.sh | bash"
