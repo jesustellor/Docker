@@ -29,7 +29,7 @@ This file will be used to create an ubuntu image with git installed.. next you b
 ```
 
 the period `.` is used to specify the current directory. it is there to specify the location of the `Dockerfile` file on the current directory.
-This will create an image named `git-image` that contains the image with git installed.
+This will create an image named `git-image` that contains the image with git installed. Feel free to rename it whatever you want.
 
 to run the image you can use the following command in the directory you want to use git in. im not sure if there is a shortcut for this yet, but this is how i run the image in my terminal
 
@@ -38,6 +38,19 @@ docker run -it --rm -v "$(pwd):/workspace" -w /workspace git-image
 ```
 
 this will run docker in interactive mode, remove the container when finished, mount the current directory into the container, and set the working directory to the current directory created in the container..
+
+## Docker with Node
+
+To run a Node.js project with Docker, you will need to install Node.js. once you are in the image above yuo can use the following command to install Node.js.
+
+```
+sudo apt-get install nodejs npm
+```
+
+You started of with an Ubuntu image and Git and now you have Nodejs as well.
+ ***NOTE:***
+***Docker is not a Node.js package manager.***
+***Please ensure it is already installed on your system.***
 
 ### VSCODE EXTENSION
 
@@ -58,29 +71,6 @@ git config --global user.email email.@email.com
 
 changing the username and email to match your git account..
 
-## Docker with Node
-
-Node has an easy option to build images 
-
- ***NOTE:***
-***Docker is not a Node.js package manager.***
-***Please ensure it is already installed on your system.***
-***Follow official instructions at https://docs.docker.com/desktop/
-Docker images are provided officially at https://github.com/nodejs/docker-node/***
-
-pull the Node.js Docker image
-```
-docker pull node:20-alpine
-```
-verify the right Node.js version is in the environment
-```
-docker run node:20-alpine node -v # should print `v20.17.0`
-```
-verifies the right npm version is in the environment
-```
-docker run node:20-alpine npm -v # should print `10.8.2
-```
-
 ### Node projects with Docker
 
 to get this to work, if you have been following along should have 2 vscode windows open, one that you used the terminal on and Dev Devices, and one that has workspace at the top of vscode.. 
@@ -100,48 +90,118 @@ docker commit container_id new_image_name
 
 You can now use `docker run -it --rm -v "$(pwd):/workspace" -w /workspace new_image_name`
 
-### known issues
-
-***NOTE*** you can only use one at a time.. but can go between them easily... 
-
-***Ubuntu is sourcing the bashrc file from ~/.bashrc but you can run source /home/ubuntu/.bashrc*** the `~/.bashrc` is color less so when you source to `/home/ubuntu/.bashrc` it will change the terminal color.. you can copy the `bashrc` file from `/home/ubuntu/.bashrc` and paste it in `~/.bashrc`, and make the new image from the container. to not source each time...
-
-***ALTERNATIVE*** **you can update the Docker file to include node and npm `RUN apt-get update && apt-get install -y git nodejs npm` and rebuild the image.. `docker build -t node-image .`** 
-
-
 Happy Coding..
 
 
 # UPDATE 9/27/2024
 
-I have mainstreamed my environment to Using Docker Only, after downloading the OpenVS Code for the Web Extension from docker, i saw that in order to use the extension with added packages you had to install them using commands found here [Here](https://code.visualstudio.com/docs/remote/containers).
+I have mainstreamed my environment to Using Docker Only, after downloading the OpenVS Code for the Web Extension from docker, i saw that in order to use the extension with added packages you had to install them using commands found here [Here](https://github.com/marcelo-ochoa/coder-docker-extension/blob/main/README.md). add them only after completing this next step or you will have to do it all again.
+
+I then modify the config file located somewhere similar to this.. `C:\Users\jesus\AppData\Roaming\Docker\extensions\mochoa_coder-docker-extension\vm`
+
+The docker compose file should be updated to include the following port updates for your projects, and folder you want to mount, I just mount Documents.. thats only if you want to make it easy to transfer files between the editor and your computer.
 
 ```
-docker exec -ti openvscode_embedded_dd_vm /bin/sh -c "curl -s https://raw.githubusercontent.com/marcelo-ochoa/openvscode-docker-extension/main/addDocker.sh | bash"
+name: mochoa_coder-docker-extension-desktop-extension
+services:
+  coder:
+    command:
+    - --auth
+    - none
+    - --verbose
+    - --app-name
+    - VS
+    - Code
+    - Web
+    - Docker
+    - Desktop
+    - Extension
+    container_name: coder_embedded_dd_vm
+    deploy:
+      restart_policy:
+        condition: always
+    environment:
+      TZ: America/Argentina/Buenos_Aires
+    image: codercom/code-server:4.90.2
+    labels:
+      com.docker.desktop.extension: "true"
+      com.docker.desktop.extension.name: VS Code for the Web
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 8080
+      published: "57080"
+      protocol: tcp
+    - mode: ingress
+      target: 3000
+      published: "3000"
+      protocol: tcp
+    restart: unless-stopped
+    volumes:
+    - type: volume
+      source: coder_data
+      target: /home/coder
+      volume: {}
+    - type: bind
+      source: /var/run/docker.sock.raw
+      target: /var/run/docker.sock
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:/Users/Jesus/Documents
+      target: /home/coder/Documents
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /run/guest-services/mochoa_coder-docker-extension
+      target: /run/guest-services
+      bind:
+        create_host_path: true
+  coder-docker-extension:
+    container_name: mochoa_coder-docker-extension-desktop-extension-service
+    deploy:
+      restart_policy:
+        condition: always
+    image: mochoa/coder-docker-extension:4.90.2
+    labels:
+      com.docker.desktop.extension: "true"
+      com.docker.desktop.extension.name: VS Code for the Web
+    networks:
+      default: null
+    volumes:
+    - type: bind
+      source: /run/guest-services/mochoa_coder-docker-extension
+      target: /run/guest-services
+      bind:
+        create_host_path: true
+networks:
+  default:
+    name: mochoa_coder-docker-extension-desktop-extension_default
+volumes:
+  coder_data:
+    name: mochoa_coder-docker-extension-desktop-extension_coder_data
 ```
-the above command did not work for me as it was exiting without installing... i ran this alternatively
+
+Once you have restarted Docker and then your Computer, because after a Docker restart it usually doesn't do it.. you will see your folder and inside Docker Desktop, under the containers, you will you that the new port has been added as well.
+
+## Addind extra packages
+If want to run/debug NodeJS code a node command must be installed prior you checkout for project. To simplify that an script is provided as post installation step, here an example of using them:
 
 ```
-docker exec -ti openvscode_embedded_dd_vm /bin/sh -c "curl -s https://raw.githubusercontent.com/marcelo-ochoa/openvscode-docker-extension/main/addDocker.sh | sed 's/apt-get install/apt-get install -y/g' | bash"
+docker exec -ti --user root coder_embedded_dd_vm /bin/sh -c "curl -s https://raw.githubusercontent.com/marcelo-ochoa/coder-docker-extension/main/addNodeJS.sh | bash"
+
+docker exec -ti --user root coder_embedded_dd_vm /bin/sh -c "curl -s https://raw.githubusercontent.com/marcelo-ochoa/coder-docker-extension/main/addDocker.sh | bash"
+
+docker exec -ti --user root coder_embedded_dd_vm /bin/sh -c "curl -s https://raw.githubusercontent.com/marcelo-ochoa/coder-docker-extension/main/addJava.sh | bash"
+
+docker exec -ti --user root coder_embedded_dd_vm /bin/sh -c "curl -s https://raw.githubusercontent.com/marcelo-ochoa/coder-docker-extension/main/addPython.sh | bash"
+
 ```
-adding the -y flag to apt-get so the installation can run smoothly.
 
 ## Adding Oh My ZSH
 
-with the above command tweak it to include `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
-
-ending up with something like this
-```
-docker exec -ti openvscode_embedded_dd_vm /bin/sh -c "curl -s https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sed 's/apt-get install/apt-get install -y/g' | bash"
-```
-
-### Adding node and npm
-
-From here you can install node and npm, or any other tool you might need, python or ruby..
-
-```
-sudo apt-get install nodejs npm
-```
+simply run this command in the terminal inside vsocde for the webs terminal `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
 
 I thought at first that this was being installed on my WSL, but it is in fact being installed in the container / extension for vscode.. 
 
