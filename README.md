@@ -10,9 +10,11 @@ This repository is a comprehensive documentation on how to effectively use Docke
 
 Visit [Docker.com](https://www.docker.com/products/docker-desktop/) Download and install docker for your operating system.
 
-### Docker with Git
+### Docker as VsCode
 
-After you have Docker installed, you can use it to build images that when ran will turn into containers... ***Before you continue*** make sure docker is running its engine. 
+After you have Docker installed, you can use it to build images that when ran will turn into containers... ***Before you continue*** make sure Docker Desktop is running.
+
+In Docker Desktop, click on Extensions, and search for vscode, there are 2 version, I get the one with the most downloads, its also the one with a higher `version number, 4.0 or higher. Both are published under the same name.. [VsCode Extension](https://hub.docker.com/extensions/mochoa/openvscode-docker-extension)
 
 create a file called `Dockerfile` to create your git image file that you will be using across your projects. This file does not have an extension. **NOTE** You are creating a text file here and not running commands in the terminal.
 
