@@ -1,11 +1,10 @@
 # Docker Workflow
-***I am using VSCODE for this project.***
-This repository is a comprehensive documentation on how to effectively use Docker with Git and Node.js it covers
-* **Setting up Docker**: Installing and configuring Docker, and  and node projects.
-* **Git projects**: Building and running git projects using Docker containers.
-* **Node projects**: Building and running node projects using Docker containers.
+***I am using a fresh Windows 11 install for this project.***
+This repository is a comprehensive documentation on how to effectively use Docker as a Development Environment.. Also including tips on Cloud Development..
 
-Feel free to _modify_ this description, on any section you want to highlight. 
+## Docker Workflow
+* **Setting up Docker**: Installing and configuring Docker with VsCode, Git, Node and any other tools you need.
+* **Setting up Folder & Ports for Development**: In this section i will explain how to work with local files, as well as map ports for specific needs to run React or your project.
 
 ## Install Docker..
 
