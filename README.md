@@ -1,5 +1,6 @@
 # Docker Workflow
 ***I am using a fresh Windows 11 install for this project.***
+***UPDATE*** ***I am now using Arch Linux, i challenged myself to only use a terminal based environment and once i got used to it i installed to gui. i still use nvim as my editor of choice. i have not set this up on linux but will give it a shot soon***
 This repository is a comprehensive documentation on how to effectively use Docker as a Development Environment.. Also including tips on Cloud Development..
 
 ## Docker Workflow
